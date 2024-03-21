@@ -1,0 +1,64 @@
+@* Defines the Route that will direct you to this page *@
+@page "/longboards"
+
+@* This is what's going to display in your browser tab/window as the tab/window's title. *@
+<PageTitle>Longboards</PageTitle>
+
+@* This is just the regular old HTML we are using to display the given text on the page. *@
+<h1>Our Collection</h1>
+<p>View our collection of longboards or add your own!</p>
+
+@* Display our list of longboards here *@
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Speed</th>
+            <th>Style</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var longboard in LongboardCollection)
+        {
+            <tr>
+                <td>@longboard.Name</td>
+                <td>@longboard.Description</td>
+                <td>@longboard.Speed</td>
+                <td>@longboard.Style</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr/>
+
+
+<h3>Add New Longboard</h3>
+
+@* Very simple form for adding a new longboard to our collection. *@
+<form @onsubmit="AddLongboard">
+
+    @* Each input includes its own lable and will require some text in order for the form to submit, since we use the 'required' keyword. *@
+    @* We bind the value of the input to the given field on the newLongboard variable. *@
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" @bind="newLongboard.Name" required />
+    </div>
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <input type="text" class="form-control" id="description" @bind="newLongboard.Description" required />
+    </div>
+    <div class="form-group">
+        <label for="speed">Speed:</label>
+        <input type="text" class="form-control" id="speed" @bind="newLongboard.Speed" required />
+    </div>
+    <div class="form-group">
+        <label for="style">Style:</label>
+        <input type="text" class="form-control" id="style" @bind="newLongboard.Style" required />
+    </div>
+    <br/>
+
+    @* Button type of submit will trigger the @onsubmit of this form, calling AddLongboard. *@
+    <button type="submit" class="btn btn-primary">Add Longboard</button>
+</form>
